@@ -59,6 +59,7 @@ class SurepyEntity(ABC):
 @dataclass
 class StateFeeding:
     change: list[float]
+    current_weight: list[float]
     at: datetime | None
 
 
