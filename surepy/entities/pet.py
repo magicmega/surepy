@@ -110,6 +110,7 @@ class Pet(SurepyEntity):
         if activity := self._data.get("status", {}).get("feeding", {}):
             return StateFeeding(
                 change=activity.get("change", [0.0, 0.0]),
+                current_weight=activity.get("current_weight", [0.0, 0.0]),
                 at=datetime.fromisoformat(activity.get("at", None)),
             )
 
