@@ -104,7 +104,11 @@ class FeederBowl:
     @property
     def change(self) -> float:
         return float(self._data["change"])
-
+        
+    @property
+    def current_weight(self) -> float:
+        return float(self._data["current_weight"])
+        
     @property
     def target(self) -> int | None:
         return int(self._data["target"]) if "target" in self._data else None
