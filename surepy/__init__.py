@@ -122,6 +122,7 @@ class Surepy:
         self._hubs: dict[int, Any] = {}
 
         self._breeds: dict[int, dict[int, Any]] = {}
+        self._timezones: dict[int, dict[int, Any]] = {}
         self._species_breeds: dict[int, dict[int, Any]] = {}
         self._conditions: dict[int, Any] = {}
 
@@ -340,7 +341,10 @@ class Surepy:
             for condition in attributes.get("condition", {}):
                 self._conditions[condition["id"]] = condition["name"]
 
-        return attributes
+            for timezone in attributes.get("timezone", {}):
+                self._timezones[timezone["id"]] = timezone["timezone"]
+
+         return attributes
 
     async def get_entities(self, refresh: bool = False) -> dict[int, SurepyEntity]:
         """Get all Entities (Pets/Devices)"""
