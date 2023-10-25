@@ -182,6 +182,8 @@ async def pets(ctx: click.Context, token: str | None) -> None:
         table.add_column("Where", justify="right")
         table.add_column("Feeding A", justify="right", style="bold")
         table.add_column("Feeding B", justify="right", style="bold")
+        table.add_column("Current Weight A", justify="right", style="bold")
+        table.add_column("Current Weight B", justify="right", style="bold")
         table.add_column("Lunch Time", justify="right", style="bold")
         table.add_column("Drinking", justify="right", style="bold")
         table.add_column("Drink Time", justify="right", style="bold")
@@ -191,11 +193,14 @@ async def pets(ctx: click.Context, token: str | None) -> None:
         for pet in pets:
 
             feeding_a = feeding_b = lunch_time = None
+            current_weight_a = current_weight_b = None
             drinking_change = drink_time = None
 
             if pet.feeding:
                 feeding_a = f"{pet.feeding.change[0]}g"
                 feeding_b = f"{pet.feeding.change[1]}g"
+                current_weight_a = f"{pet.feeding.current_weight[0]}g"
+                current_weight_b = f"{pet.feeding.current_weight[1]g"
                 lunch_time = pet.feeding.at.time() if pet.feeding.at else None
             if pet.drinking:
                 drinking_change = f"{pet.drinking.change[0]}ml"
@@ -206,6 +211,8 @@ async def pets(ctx: click.Context, token: str | None) -> None:
                 str(pet.location),
                 f"{feeding_a}",
                 f"{feeding_b}",
+                f"{current_weight_a}",
+                f"{current_weight_b}",
                 str(lunch_time),
                 f"{drinking_change}",
                 str(drink_time),
